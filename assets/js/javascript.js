@@ -9,8 +9,6 @@ iconRemove.addEventListener('click', removeToggle)
     nav.classList.remove('active') 
 }
 
-
-
 icon.addEventListener('click',toggleCard) // adicionando função ao botão do icone 
 function toggleCard() {  // sinalizando a função 
     const nav = document.getElementById('nav')
@@ -44,11 +42,22 @@ function ready() {
     const finalizarCompra = document.getElementsByClassName("finalizarCompra")[0]
     finalizarCompra.addEventListener("click",checkCompra)
 
+    const botaoOpen = document.getElementsByClassName('botao')
+    for (let i = 0; i < botaoOpen.length; i++) {
+        botaoOpen[i].addEventListener('click',openCard)
+        
+    }
+
+    
+}
+function openCard() { // assionando a função assim que clicar no produto pra comprar, abrir o menu do carrinhos
+    const nav = document.getElementById('nav') // pegando o nav [ onde está o carrinho ]
+    nav.classList.add('active')  // e assim que clicar nele adicionar a class active
 }
 
 function checkCompra() { 
     if(totalAmount === "0,00") { 
-        alert('seu carrinho está vazio.')
+        alert('seu carrinho está vázio.')
     }
     else { 
         window.alert(`muito obrigado por comprar nossos produtos. | valor total foi de R$:${totalAmount}`) 
@@ -65,12 +74,20 @@ function checkIfInputUpdate(event) {   // evento que assim que clicar no botão 
 }
 
 function addCartProduct(event) {   // cria uma função de click no event 
-    const button = event.target     
+    const button = event.target   
     const cartProductInfo = button.parentElement    // entra no parente de button que no caso seria container-products > cartProductInfo
     const productImage = cartProductInfo.getElementsByClassName('productImg')[0].src    // entra no container-products e procura por uma classe ProductImg - IMG [ o src é o enderço da imagem ]
     const productTittle = cartProductInfo.getElementsByClassName('nomeProduct')[0].innerText //entra no container-products e procura por uma classe nomeProduct - span [ o innerText é pra pegar somente o texto e não em si a classe ] 
     const productPrice = cartProductInfo.getElementsByClassName('priceProduct')[0].innerText //entra no container-products e procura por uma classe priceProduct - span [ o innerText é pra pegar somente o texto e não em si a classe ]
 
+    const nameProduto = document.getElementsByClassName("nomeProduto")
+    for (let i = 0; i < nameProduto.length; i++) {
+        if ( nameProduto[i].innerText == productTittle) { 
+            nameProduto[i].parentElement.getElementsByClassName("inputNumber")[0].value++
+            updateTotal()
+            return
+        }        
+    }
      let newCartProduct = document.createElement("div")    // criando um elemento chamado div
      newCartProduct.classList.add("quadrado")    // atribuindo a class ao elemento div de quadrado 
 
@@ -79,7 +96,7 @@ function addCartProduct(event) {   // cria uma função de click no event
                             <img src="${productImage}" alt="${productTittle}" id="imgSection">
                         </div>
                         <div class="section-conteudo"> 
-                            <span class="nomeProduct">${productTittle}
+                            <span class="nomeProduto">${productTittle} </span>
                             <span class="priceProduto">${productPrice}</span>
                             <input type="number" class="inputNumber" value="1" min="0"> 
                             
@@ -89,10 +106,9 @@ function addCartProduct(event) {   // cria uma função de click no event
      ` // dentro da div atribuindo o que a div vai receber.
 const cartBody = document.querySelector(".container-box")   // guardando em uma const onde vai ser adicionado o elemento.
 cartBody.append(newCartProduct)  // adicionando o elemento na const onde criamos por append()
+
 updateTotal() // chamando a função que assim que eu adicionar o produto no carrinho ele conte no valorTotal
-
 // ambos usando o newCartProduct pois é o cart que é adicionado dinamicamente por isto estamos fazendo alteração nele
-
 newCartProduct.getElementsByClassName('inputNumber')[0].addEventListener("change",checkIfInputUpdate)   // função de assim que clicar na quantidade, o valor ser alterado
 newCartProduct.getElementsByClassName('buttonRemove')[0].addEventListener("click",removeProduct) // função de assim que clicar no produto ele remover
 
