@@ -48,10 +48,10 @@ function ready() {
 
 function checkCompra() { 
     if(totalAmount === "0,00") { 
-        alert('vai comprar algo seu pobre')
+        alert('seu carrinho está vazio.')
     }
     else { 
-        window.alert(`muito obrigado por comprar nossos produtos | valor total foi de R$:${totalAmount}`) 
+        window.alert(`muito obrigado por comprar nossos produtos. | valor total foi de R$:${totalAmount}`) 
        
     }
 }
