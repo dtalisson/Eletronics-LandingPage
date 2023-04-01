@@ -229,6 +229,30 @@ body {
 .container-products .botao:hover { 
     background-color: rgb(0, 94, 0);
 }
+.container-products .btnInf { 
+    padding: .5rem;
+    width:110px;
+    background-color: brown;
+    margin: 1rem 0rem;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+
+/* MODAL */
+#modal { 
+    margin: auto;
+    width: 80%;   
+    border: none;
+    border-radius: .5rem;
+    padding: 2rem;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
 @media (max-width:1050px) { 
     #cart { 
         width: 40%;
@@ -310,7 +334,7 @@ body {
     }
     #cart { 
         width: 100%;
-    }
+    } 
     #section-products { 
         grid-template-columns: 1fr
 
